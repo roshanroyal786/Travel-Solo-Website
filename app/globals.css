@@ -1,0 +1,93 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-inter: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-fraunces: 'Fraunces', Georgia, serif;
+    --color-midnight: #0A1020;
+    --color-horizon: #1B3A6B;
+    --color-champagne: #E6C48A;
+    --color-coral: #FF6B4A;
+    --color-cloud: #F6F3EE;
+    --color-mist: #A9B4C8;
+    --color-whatsapp: #25D366;
+  }
+
+  body {
+    background-color: var(--color-midnight);
+    color: #F6F3EE;
+    font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, .font-display {
+    font-family: var(--font-fraunces), serif;
+  }
+}
+
+/* Custom Utilities */
+.bg-midnight { background-color: #0A1020; }
+.bg-horizon { background-color: #1B3A6B; }
+.bg-champagne { background-color: #E6C48A; }
+.bg-coral { background-color: #FF6B4A; }
+.bg-cloud { background-color: #F6F3EE; }
+.bg-mist { background-color: #A9B4C8; }
+.bg-whatsapp { background-color: #25D366; }
+
+.text-midnight { color: #0A1020; }
+.text-horizon { color: #1B3A6B; }
+.text-champagne { color: #E6C48A; }
+.text-coral { color: #FF6B4A; }
+.text-cloud { color: #F6F3EE; }
+.text-mist { color: #A9B4C8; }
+.text-whatsapp { color: #25D366; }
+
+.border-midnight { border-color: #0A1020; }
+.border-horizon { border-color: #1B3A6B; }
+.border-champagne { border-color: #E6C48A; }
+.border-coral { border-color: #FF6B4A; }
+.border-cloud { border-color: #F6F3EE; }
+.border-mist { border-color: #A9B4C8; }
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Glassmorphism */
+.glass-nav {
+  background: rgba(10, 16, 32, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(230, 196, 138, 0.15);
+}
+
+.glass-card {
+  background: rgba(27, 58, 107, 0.18);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(230, 196, 138, 0.12);
+}
+
+.glass-card-light {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(10, 16, 32, 0.08);
+}
+
+/* Pulse animation for WhatsApp */
+@keyframes softPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 14px rgba(37, 211, 102, 0);
+  }
+}
+
+.whatsapp-pulse {
+  animation: softPulse 8s infinite ease-in-out;
+}
