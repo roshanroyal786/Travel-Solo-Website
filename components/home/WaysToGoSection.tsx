@@ -43,18 +43,18 @@ const pathways = [
 
 export default function WaysToGoSection() {
   return (
-    <section className="py-24 bg-midnight/90 border-t border-champagne/10 relative">
+    <section className="py-24 bg-slate-50/70 border-t border-slate-200 relative">
       <div className="max-w-[1280px] mx-auto px-6">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
           <div className="max-w-2xl">
-            <span className="text-xs uppercase tracking-widest text-champagne font-mono font-semibold">
+            <span className="text-xs uppercase tracking-widest text-primary font-mono font-semibold">
               Pathway Architecture
             </span>
-            <h2 className="font-display font-light text-3xl sm:text-5xl text-cloud leading-tight mt-3">
-              Four ways to go. <span className="italic text-champagne font-normal">Choose your route.</span>
+            <h2 className="font-display font-normal text-3xl sm:text-5xl text-slate-900 leading-tight mt-3">
+              Four ways to go. <span className="italic text-primary font-normal">Choose your route.</span>
             </h2>
           </div>
-          <p className="text-mist text-base max-w-md">
+          <p className="text-slate-600 text-base max-w-md">
             Whether you are relocating for a skilled salary or backpacking across Central Europe, every category has its own strict documentation logic.
           </p>
         </div>
@@ -66,30 +66,30 @@ export default function WaysToGoSection() {
               <Link
                 key={p.id}
                 href={p.href}
-                className="group p-8 rounded-3xl glass-card hover:bg-horizon/30 border border-champagne/15 hover:border-champagne/35 transition-all duration-300 flex flex-col justify-between"
+                className="group p-8 rounded-3xl bg-white hover:bg-sky-50/40 border border-slate-200/90 hover:border-primary/40 shadow-xs hover:shadow-md transition-all duration-300 flex flex-col justify-between"
               >
                 <div>
                   <div className="flex items-center justify-between mb-6">
-                    <div className="w-12 h-12 rounded-2xl bg-horizon/60 border border-champagne/20 flex items-center justify-center text-champagne group-hover:scale-110 transition-transform">
+                    <div className="w-12 h-12 rounded-2xl bg-sky-50 border border-sky-100 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
                       <Icon className="w-6 h-6" />
                     </div>
-                    <span className="text-[11px] font-mono uppercase tracking-wider text-mist px-3 py-1 rounded-full bg-midnight/60 border border-champagne/10">
+                    <span className="text-[11px] font-mono uppercase tracking-wider text-slate-500 px-3 py-1 rounded-full bg-slate-100 border border-slate-200">
                       {p.badge}
                     </span>
                   </div>
 
-                  <h3 className="font-display text-2xl font-normal text-cloud group-hover:text-champagne transition-colors mb-2">
+                  <h3 className="font-display text-2xl font-normal text-slate-900 group-hover:text-primary transition-colors mb-2">
                     {p.title}
                   </h3>
-                  <div className="text-xs font-semibold text-champagne/90 mb-3 font-mono">
+                  <div className="text-xs font-semibold text-primary mb-3 font-mono">
                     {p.subtitle}
                   </div>
-                  <p className="text-mist text-sm leading-relaxed mb-6">
+                  <p className="text-slate-600 text-sm leading-relaxed mb-6">
                     {p.description}
                   </p>
                 </div>
 
-                <div className="flex items-center gap-2 text-xs font-semibold text-coral group-hover:translate-x-1 transition-transform">
+                <div className="flex items-center gap-2 text-xs font-semibold text-primary group-hover:translate-x-1 transition-transform">
                   <span>Explore Requirements</span>
                   <ArrowUpRight className="w-4 h-4" />
                 </div>

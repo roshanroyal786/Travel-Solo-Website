@@ -7,15 +7,29 @@
   --font-display: 'Playfair Display', Georgia, serif;
   --font-playfair: 'Playfair Display', Georgia, serif;
 
-  --color-midnight: #08111E;
-  --color-navy: #1B365D;
+  --color-primary: #005A9C;
+  --color-primary-foreground: #FFFFFF;
+  --color-background: #FFFFFF;
+  --color-foreground: #0F172A;
+  --color-muted: #F8FAFC;
+  --color-muted-foreground: #64748B;
+  --color-accent: #F1F5F9;
+  --color-accent-foreground: #0F172A;
+  --color-destructive: #EF4444;
+  --color-destructive-foreground: #FFFFFF;
+  --color-border: #E2E8F0;
+  --color-input: #E2E8F0;
+  --color-ring: #005A9C;
+
+  --color-midnight: #FFFFFF;
+  --color-navy: #0A1C36;
   --color-horizon: #005A9C;
-  --color-sky: #60C1E5;
-  --color-ice: #A0E0EF;
-  --color-champagne: #60C1E5;
+  --color-sky: #0284C7;
+  --color-ice: #E0F2FE;
+  --color-champagne: #005A9C;
   --color-coral: #005A9C;
-  --color-cloud: #F0F8FF;
-  --color-mist: #94B4D1;
+  --color-cloud: #0F172A;
+  --color-mist: #475569;
   --color-whatsapp: #25D366;
 }
 
@@ -26,21 +40,31 @@
     --font-sans: var(--font-poppins);
     --font-display: var(--font-playfair);
 
-    --color-midnight: #08111E;
-    --color-navy: #1B365D;
+    --primary: #005A9C;
+    --primary-foreground: #FFFFFF;
+    --background: #FFFFFF;
+    --foreground: #0F172A;
+    --muted: #F8FAFC;
+    --muted-foreground: #64748B;
+    --border: #E2E8F0;
+    --input: #E2E8F0;
+    --ring: #005A9C;
+
+    --color-midnight: #FFFFFF;
+    --color-navy: #0A1C36;
     --color-horizon: #005A9C;
-    --color-sky: #60C1E5;
-    --color-ice: #A0E0EF;
-    --color-champagne: #60C1E5;
+    --color-sky: #0284C7;
+    --color-ice: #E0F2FE;
+    --color-champagne: #005A9C;
     --color-coral: #005A9C;
-    --color-cloud: #F0F8FF;
-    --color-mist: #94B4D1;
+    --color-cloud: #0F172A;
+    --color-mist: #475569;
     --color-whatsapp: #25D366;
   }
 
   body {
-    background-color: var(--color-midnight);
-    color: var(--color-cloud);
+    background-color: #FFFFFF;
+    color: #1E293B;
     font-family: var(--font-poppins), system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
     line-height: 1.6;
     overflow-x: hidden;
@@ -50,41 +74,42 @@
 
   h1, h2, h3, h4, h5, h6, .font-display, .font-serif {
     font-family: var(--font-playfair), Georgia, serif;
+    color: #0F172A;
   }
 }
 
-/* Palette 1 Custom Utilities */
-.bg-midnight { background-color: #08111E; }
-.bg-navy { background-color: #1B365D; }
+/* Trustworthy Light Theme Custom Utilities */
+.bg-midnight { background-color: #FFFFFF; }
+.bg-navy { background-color: #0A1C36; }
 .bg-horizon { background-color: #005A9C; }
-.bg-sky { background-color: #60C1E5; }
-.bg-ice { background-color: #A0E0EF; }
-.bg-champagne { background-color: #60C1E5; }
+.bg-sky { background-color: #0284C7; }
+.bg-ice { background-color: #E0F2FE; }
+.bg-champagne { background-color: #005A9C; }
 .bg-coral { background-color: #005A9C; }
-.bg-cloud { background-color: #F0F8FF; }
-.bg-mist { background-color: #94B4D1; }
+.bg-cloud { background-color: #0F172A; }
+.bg-mist { background-color: #475569; }
 .bg-whatsapp { background-color: #25D366; }
 
-.text-midnight { color: #08111E; }
-.text-navy { color: #1B365D; }
+.text-midnight { color: #FFFFFF; }
+.text-navy { color: #0A1C36; }
 .text-horizon { color: #005A9C; }
-.text-sky { color: #60C1E5; }
-.text-ice { color: #A0E0EF; }
-.text-champagne { color: #60C1E5; }
-.text-coral { color: #60C1E5; }
-.text-cloud { color: #F0F8FF; }
-.text-mist { color: #94B4D1; }
+.text-sky { color: #0284C7; }
+.text-ice { color: #005A9C; }
+.text-champagne { color: #005A9C; }
+.text-coral { color: #005A9C; }
+.text-cloud { color: #0F172A; }
+.text-mist { color: #475569; }
 .text-whatsapp { color: #25D366; }
 
-.border-midnight { border-color: #08111E; }
-.border-navy { border-color: #1B365D; }
+.border-midnight { border-color: #E2E8F0; }
+.border-navy { border-color: #0A1C36; }
 .border-horizon { border-color: #005A9C; }
-.border-sky { border-color: #60C1E5; }
-.border-ice { border-color: #A0E0EF; }
-.border-champagne { border-color: #60C1E5; }
+.border-sky { border-color: #0284C7; }
+.border-ice { border-color: #BAE6FD; }
+.border-champagne { border-color: #CBD5E1; }
 .border-coral { border-color: #005A9C; }
-.border-cloud { border-color: #F0F8FF; }
-.border-mist { border-color: #94B4D1; }
+.border-cloud { border-color: #E2E8F0; }
+.border-mist { border-color: #E2E8F0; }
 
 .font-poppins, .font-sans {
   font-family: var(--font-poppins), system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
@@ -98,25 +123,27 @@
   font-variant-numeric: tabular-nums;
 }
 
-/* Glassmorphism tuned to Palette 1 */
+/* Light Theme Clean Glassmorphism & Cards */
 .glass-nav {
-  background: rgba(8, 17, 30, 0.88);
+  background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(96, 193, 229, 0.16);
+  border-bottom: 1px solid rgba(226, 232, 240, 0.9);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
 .glass-card {
-  background: rgba(27, 54, 93, 0.28);
+  background: #FFFFFF;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(96, 193, 229, 0.18);
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.05);
 }
 
 .glass-card-light {
-  background: rgba(240, 248, 255, 0.95);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(27, 54, 93, 0.12);
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
 }
 
 /* Pulse animation for WhatsApp */

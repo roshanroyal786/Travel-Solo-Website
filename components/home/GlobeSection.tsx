@@ -147,30 +147,30 @@ export default function GlobeSection() {
       const cy = height / 2;
       const R = Math.min(width, height) * 0.40;
 
-      // 1. Draw Starfield Background
+      // 1. Draw Subtle Space Accents
       starClock += 0.02;
       STARS.forEach((star) => {
         const sx = (star.x / 100) * width;
         const sy = (star.y / 100) * height;
         const twinkle = Math.sin(starClock * star.speed + star.x) * 0.3 + 0.7;
-        ctx.fillStyle = `rgba(160, 224, 239, ${star.alpha * twinkle * 0.75})`;
+        ctx.fillStyle = `rgba(0, 90, 156, ${star.alpha * twinkle * 0.18})`;
         ctx.beginPath();
         ctx.arc(sx, sy, star.size * dpr, 0, Math.PI * 2);
         ctx.fill();
       });
 
-      // 2. Palette 1 Atmospheric Rim Aura (Royal Cobalt & Sky Blue)
+      // 2. Trustworthy Blue Atmospheric Rim Aura
       const auraGrad = ctx.createRadialGradient(cx, cy, R * 0.85, cx, cy, R * 1.28);
-      auraGrad.addColorStop(0, "rgba(0, 90, 156, 0.45)"); // Horizon royal cobalt
-      auraGrad.addColorStop(0.4, "rgba(96, 193, 229, 0.25)"); // Sky blue glow
-      auraGrad.addColorStop(0.75, "rgba(160, 224, 239, 0.15)"); // Ice blue edge
-      auraGrad.addColorStop(1, "rgba(8, 17, 30, 0)");
+      auraGrad.addColorStop(0, "rgba(0, 90, 156, 0.22)"); // Soft Horizon royal cobalt
+      auraGrad.addColorStop(0.4, "rgba(96, 193, 229, 0.12)"); // Subtle sky blue glow
+      auraGrad.addColorStop(0.75, "rgba(160, 224, 239, 0.05)"); // Soft perimeter
+      auraGrad.addColorStop(1, "rgba(255, 255, 255, 0)");
       ctx.fillStyle = auraGrad;
       ctx.beginPath();
       ctx.arc(cx, cy, R * 1.28, 0, Math.PI * 2);
       ctx.fill();
 
-      // 3. Spherical Globe Body (Navy to Deep Midnight)
+      // 3. Spherical Globe Body (Diplomatic Deep Navy)
       const globeGrad = ctx.createRadialGradient(
         cx - R * 0.35,
         cy - R * 0.35,
@@ -179,10 +179,10 @@ export default function GlobeSection() {
         cy,
         R
       );
-      globeGrad.addColorStop(0, "#1B365D"); // Palette 1 Tier 1 Navy
-      globeGrad.addColorStop(0.45, "#0f2342");
-      globeGrad.addColorStop(0.8, "#091424");
-      globeGrad.addColorStop(1, "#050b14");
+      globeGrad.addColorStop(0, "#1B365D"); // Diplomatic Deep Navy
+      globeGrad.addColorStop(0.45, "#0E2442");
+      globeGrad.addColorStop(0.8, "#091629");
+      globeGrad.addColorStop(1, "#050C17");
       ctx.fillStyle = globeGrad;
       ctx.beginPath();
       ctx.arc(cx, cy, R, 0, Math.PI * 2);
@@ -194,7 +194,7 @@ export default function GlobeSection() {
       ctx.stroke();
 
       // Outer thin orbital guide ring
-      ctx.strokeStyle = "rgba(160, 224, 239, 0.20)";
+      ctx.strokeStyle = "rgba(0, 90, 156, 0.15)";
       ctx.lineWidth = 1 * dpr;
       ctx.beginPath();
       ctx.arc(cx, cy, R + 16 * dpr, 0, Math.PI * 2);
@@ -526,21 +526,21 @@ export default function GlobeSection() {
   };
 
   return (
-    <section className="py-24 bg-midnight border-t border-champagne/10 relative overflow-hidden">
+    <section className="py-24 bg-slate-50/70 border-t border-slate-200 relative overflow-hidden">
       {/* Background ambient lighting */}
-      <div className="absolute top-1/2 left-1/3 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-horizon/20 rounded-full blur-[140px] pointer-events-none" />
-      <div className="absolute bottom-10 right-1/4 w-[350px] h-[350px] bg-sky/15 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/3 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-sky-100/40 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute bottom-10 right-1/4 w-[350px] h-[350px] bg-blue-100/30 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="max-w-[1280px] mx-auto px-6 relative z-10">
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-horizon/40 border border-champagne/20 text-champagne text-xs font-mono uppercase mb-4">
-            <Plane className="w-3.5 h-3.5 text-champagne" />
-            <span>Flight Trajectory & Global Hubs</span>
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white border border-slate-200 text-primary text-xs font-mono uppercase mb-4 shadow-2xs">
+            <Plane className="w-3.5 h-3.5 text-primary" />
+            <span className="font-semibold text-slate-800">Flight Trajectory & Global Hubs</span>
           </div>
-          <h2 className="font-display font-light text-3xl sm:text-5xl text-cloud leading-tight mb-4">
-            From Delhi to <span className="italic text-champagne font-normal">anywhere.</span>
+          <h2 className="font-display font-normal text-3xl sm:text-5xl text-slate-900 leading-tight mb-4">
+            From Delhi to <span className="italic text-primary font-normal">anywhere.</span>
           </h2>
-          <p className="text-mist text-base sm:text-lg">
+          <p className="text-slate-600 text-base sm:text-lg">
             Five destination hubs. Direct documentation pathways. Every application prepared and submitted from our Dwarka office.
           </p>
         </div>
@@ -553,8 +553,8 @@ export default function GlobeSection() {
               onClick={() => setActiveStopIndex(idx)}
               className={`px-4 py-2 rounded-full text-xs font-semibold tracking-wide transition-all cursor-pointer ${
                 activeStopIndex === idx
-                  ? "bg-sky text-midnight shadow-lg scale-105"
-                  : "bg-horizon/30 text-mist hover:text-cloud hover:bg-horizon/50 border border-sky/20"
+                  ? "bg-primary text-white shadow-md scale-105"
+                  : "bg-white text-slate-600 hover:text-slate-900 hover:bg-slate-50 border border-slate-200 shadow-2xs"
               }`}
             >
               {stop.city} {stop.id === "delhi" ? "(Origin)" : ""}
@@ -568,12 +568,12 @@ export default function GlobeSection() {
           <div className="lg:col-span-7 flex justify-center items-center">
             <div className="relative w-full max-w-[500px] aspect-square flex items-center justify-center select-none">
               {/* Telemetry HUD Badge Top */}
-              <div className="absolute top-4 left-4 right-4 flex items-center justify-between text-[11px] font-mono text-champagne/90 pointer-events-none z-10 bg-midnight/70 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-champagne/20 shadow-lg">
+              <div className="absolute top-4 left-4 right-4 flex items-center justify-between text-[11px] font-mono text-slate-700 pointer-events-none z-10 bg-white/95 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-slate-200 shadow-sm">
                 <div className="flex items-center gap-1.5">
-                  <Radio className="w-3 h-3 text-sky animate-pulse" />
-                  <span>TARGET: {activeStop.city.toUpperCase()} ({activeStop.code})</span>
+                  <Radio className="w-3 h-3 text-primary animate-pulse" />
+                  <span className="font-semibold">TARGET: {activeStop.city.toUpperCase()} ({activeStop.code})</span>
                 </div>
-                <span>{activeStop.lat.toFixed(2)}°N, {activeStop.lon.toFixed(2)}°E</span>
+                <span className="text-slate-500">{activeStop.lat.toFixed(2)}°N, {activeStop.lon.toFixed(2)}°E</span>
               </div>
 
               {/* Canvas Globe */}
@@ -588,13 +588,13 @@ export default function GlobeSection() {
                 onTouchStart={handleTouchStart}
                 onTouchMove={handleTouchMove}
                 onTouchEnd={handleTouchEnd}
-                className="w-full h-full max-w-[500px] cursor-grab active:cursor-grabbing rounded-full"
+                className="w-full h-full max-w-[500px] cursor-grab active:cursor-grabbing rounded-full shadow-lg"
               />
 
               {/* Reset to Center Target Button Bottom */}
               <button
                 onClick={handleResetToTarget}
-                className="absolute bottom-4 left-1/2 -translate-x-1/2 z-10 text-[10px] font-mono uppercase tracking-widest text-champagne/90 hover:text-cloud bg-midnight/80 hover:bg-midnight px-3.5 py-1.5 rounded-full border border-champagne/20 backdrop-blur-sm transition-colors flex items-center gap-1.5 cursor-pointer shadow-md"
+                className="absolute bottom-4 left-1/2 -translate-x-1/2 z-10 text-[10px] font-mono uppercase tracking-widest text-slate-700 hover:text-primary bg-white/95 hover:bg-white px-3.5 py-1.5 rounded-full border border-slate-200 shadow-sm backdrop-blur-sm transition-colors flex items-center gap-1.5 cursor-pointer"
               >
                 <RotateCcw className="w-3 h-3" />
                 <span>Centered: {activeStop.city}</span>
@@ -604,27 +604,27 @@ export default function GlobeSection() {
 
           {/* Active Stop Detail Card */}
           <div className="lg:col-span-5 space-y-6">
-            <div className="p-8 rounded-3xl glass-card border border-champagne/20 space-y-5">
+            <div className="p-8 rounded-3xl bg-white border border-slate-200/90 shadow-sm space-y-5">
               <div className="flex items-center justify-between">
-                <span className="text-xs uppercase tracking-widest text-champagne font-mono font-semibold">
+                <span className="text-xs uppercase tracking-widest text-primary font-mono font-semibold">
                   Destination Protocol
                 </span>
-                <span className="text-xs text-mist font-mono">
+                <span className="text-xs text-slate-400 font-mono">
                   {activeStop.lat.toFixed(2)}°N, {activeStop.lon.toFixed(2)}°E
                 </span>
               </div>
 
               <div>
-                <h3 className="font-display text-3xl font-normal text-cloud mb-1">
+                <h3 className="font-display text-3xl font-normal text-slate-900 mb-1">
                   {activeStop.country}
                 </h3>
-                <div className="text-champagne font-medium text-sm flex items-center gap-1.5">
+                <div className="text-primary font-medium text-sm flex items-center gap-1.5">
                   <MapPin className="w-4 h-4" />
                   <span>{activeStop.city}</span>
                 </div>
               </div>
 
-              <p className="text-mist text-base leading-relaxed">
+              <p className="text-slate-600 text-base leading-relaxed">
                 {activeStop.tagline}
               </p>
 
@@ -632,14 +632,14 @@ export default function GlobeSection() {
                 <div className="pt-2">
                   <Link
                     href={`/countries/${activeStop.slug}`}
-                    className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-coral hover:bg-coral/90 text-white font-medium text-sm transition-all shadow-md hover:gap-3"
+                    className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary hover:bg-primary/95 text-white font-medium text-sm transition-all shadow-sm hover:gap-3"
                   >
                     <span>Explore {activeStop.country} Visa Hub</span>
                     <ArrowRight className="w-4 h-4" />
                   </Link>
                 </div>
               ) : (
-                <div className="pt-2 text-xs text-mist/70 italic">
+                <div className="pt-2 text-xs text-slate-500 italic">
                   Headquarters: Plot 14, Sector 12 Dwarka, New Delhi. Consultations available in-office and online.
                 </div>
               )}
@@ -647,9 +647,9 @@ export default function GlobeSection() {
 
             {/* Quick Micro-stats for active country */}
             {activeStop.slug && countries[activeStop.slug] && (
-              <div className="p-4 rounded-2xl bg-horizon/20 border border-champagne/10 text-xs text-mist flex items-center justify-between">
+              <div className="p-4 rounded-2xl bg-white border border-slate-200/80 text-xs text-slate-600 flex items-center justify-between shadow-2xs">
                 <span>Official Processing Available</span>
-                <span className="text-champagne font-medium">Job · Study · Tourist · Business</span>
+                <span className="text-primary font-semibold">Job · Study · Tourist · Business</span>
               </div>
             )}
           </div>

@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { UserCheck, Shield, MessageCircle, FileText, CheckCircle2 } from "lucide-react";
+import { UserCheck, Shield, MessageCircle, FileText } from "lucide-react";
 
 const pillars = [
   {
@@ -27,28 +27,28 @@ const pillars = [
 
 export default function WhyTravelSoloSection() {
   return (
-    <section className="py-24 bg-midnight border-t border-champagne/10 relative">
+    <section className="py-24 bg-white border-t border-slate-200 relative">
       <div className="max-w-[1280px] mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           <div className="lg:col-span-5 space-y-6">
-            <span className="text-xs uppercase tracking-widest text-champagne font-mono font-semibold">
+            <span className="text-xs uppercase tracking-widest text-primary font-mono font-semibold">
               The Travel Solo Standard
             </span>
-            <h2 className="font-display font-light text-3xl sm:text-5xl text-cloud leading-tight">
+            <h2 className="font-display font-normal text-3xl sm:text-5xl text-slate-900 leading-tight">
               Why work with us? <br />
-              <span className="italic text-champagne font-normal">Because we tell you the truth.</span>
+              <span className="italic text-primary font-normal">Because we tell you the truth.</span>
             </h2>
-            <p className="text-mist text-base leading-relaxed">
+            <p className="text-slate-600 text-base leading-relaxed">
               Anyone promising you a 100% guaranteed visa is lying to your face. The embassy officer decides every single file.
             </p>
-            <p className="text-mist text-base leading-relaxed">
+            <p className="text-slate-600 text-base leading-relaxed">
               What we do guarantee is that your application will be airtight. No missing translations, no fabricated work experience, and no sub-agents playing games with your life savings.
             </p>
 
             <div className="pt-2">
               <Link
                 href="/about"
-                className="inline-flex items-center gap-2 text-sm font-semibold text-coral hover:text-coral/80 transition-colors"
+                className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-primary/80 transition-colors"
               >
                 <span>Read our founder story & registration details &rarr;</span>
               </Link>
@@ -61,15 +61,15 @@ export default function WhyTravelSoloSection() {
               return (
                 <div
                   key={item.title}
-                  className="p-7 rounded-3xl glass-card border border-champagne/15 hover:border-champagne/30 transition-all space-y-4"
+                  className="p-7 rounded-3xl bg-slate-50 border border-slate-200 shadow-2xs hover:border-primary/40 hover:shadow-sm transition-all space-y-4"
                 >
-                  <div className="w-12 h-12 rounded-2xl bg-horizon/60 border border-champagne/20 flex items-center justify-center text-champagne">
+                  <div className="w-12 h-12 rounded-2xl bg-sky-50 border border-sky-100 flex items-center justify-center text-primary">
                     <Icon className="w-6 h-6" />
                   </div>
-                  <h3 className="font-display text-xl font-normal text-cloud">
+                  <h3 className="font-display text-xl font-normal text-slate-900">
                     {item.title}
                   </h3>
-                  <p className="text-mist text-xs leading-relaxed">
+                  <p className="text-slate-600 text-xs leading-relaxed">
                     {item.desc}
                   </p>
                 </div>

@@ -58,7 +58,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }}
         />
       </head>
-      <body className="bg-midnight text-cloud min-h-screen flex flex-col selection:bg-coral selection:text-white">
+      <body className="bg-white text-slate-800 min-h-screen flex flex-col selection:bg-sky-500 selection:text-white">
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />

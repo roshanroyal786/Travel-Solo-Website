@@ -36,16 +36,16 @@ const services = [
 
 export default function BeyondVisaSection() {
   return (
-    <section className="py-24 bg-midnight/90 border-t border-champagne/10 relative">
+    <section className="py-24 bg-slate-50/70 border-t border-slate-200 relative">
       <div className="max-w-[1280px] mx-auto px-6">
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <span className="text-xs uppercase tracking-widest text-champagne font-mono font-semibold">
+          <span className="text-xs uppercase tracking-widest text-primary font-mono font-semibold">
             Comprehensive Suite
           </span>
-          <h2 className="font-display font-light text-3xl sm:text-5xl text-cloud leading-tight mt-3 mb-4">
-            Beyond the visa. <span className="italic text-champagne font-normal">Everything in one place.</span>
+          <h2 className="font-display font-normal text-3xl sm:text-5xl text-slate-900 leading-tight mt-3 mb-4">
+            Beyond the visa. <span className="italic text-primary font-normal">Everything in one place.</span>
           </h2>
-          <p className="text-mist text-base sm:text-lg">
+          <p className="text-slate-600 text-base sm:text-lg">
             A visa is one piece of the puzzle. From state court translations to pre-departure lodging proofs, we handle every detail so your landing is smooth.
           </p>
         </div>
@@ -56,15 +56,15 @@ export default function BeyondVisaSection() {
             return (
               <div
                 key={svc.title}
-                className="p-7 rounded-3xl glass-card border border-champagne/15 hover:border-champagne/30 transition-all duration-300 group"
+                className="p-7 rounded-3xl bg-white border border-slate-200/90 shadow-xs hover:border-primary/40 hover:shadow-md transition-all duration-300 group"
               >
-                <div className="w-12 h-12 rounded-2xl bg-horizon/50 border border-champagne/20 flex items-center justify-center text-champagne mb-5 group-hover:scale-105 transition-transform">
+                <div className="w-12 h-12 rounded-2xl bg-sky-50 border border-sky-100 flex items-center justify-center text-primary mb-5 group-hover:scale-105 transition-transform">
                   <Icon className="w-6 h-6" />
                 </div>
-                <h3 className="font-display text-xl font-normal text-cloud group-hover:text-champagne transition-colors mb-2">
+                <h3 className="font-display text-xl font-normal text-slate-900 group-hover:text-primary transition-colors mb-2">
                   {svc.title}
                 </h3>
-                <p className="text-mist text-xs leading-relaxed">
+                <p className="text-slate-600 text-xs leading-relaxed">
                   {svc.desc}
                 </p>
               </div>
