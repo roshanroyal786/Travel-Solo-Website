@@ -22,7 +22,7 @@ export interface WhatsAppContext {
 }
 
 export function buildWhatsAppLink(context: WhatsAppContext = {}): string {
-  const rawNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '919876543210';
+  const rawNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '48537623077';
   // Strip any non-digit characters
   const cleanNumber = rawNumber.replace(/\D/g, '');
 

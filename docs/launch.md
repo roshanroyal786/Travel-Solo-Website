@@ -5,7 +5,7 @@ Checklist before connecting the custom domain and spending on paid marketing.
 ## 1. Domain & Environment Configuration
 - [ ] Connect custom apex domain (`travelsolo.in`) and `www` alias with automatic SSL on Vercel.
 - [ ] Set production environment variables in Vercel project settings:
-  - `NEXT_PUBLIC_WHATSAPP_NUMBER` (e.g. `919871234567`)
+  - `NEXT_PUBLIC_WHATSAPP_NUMBER` (e.g. `48537623077`)
   - `NEXT_PUBLIC_SITE_URL` (`https://travelsolo.in`)
   - `NEXT_PUBLIC_CAL_LINK` (`https://cal.com/travelsolo/20min`)
   - `NEXT_PUBLIC_GA_ID` (Google Analytics 4 Measurement ID)
@@ -23,7 +23,7 @@ Checklist before connecting the custom domain and spending on paid marketing.
 - [ ] Claim and verify Google Business Profile for the Dwarka office:
   - **Business Name:** Travel Solo Visa Consultancy
   - **Address:** Plot 14, Sector 12 Dwarka, New Delhi, Delhi 110078
-  - **Phone:** +91 98712 34567
+  - **Phone:** +48 537 623 077
   - **Primary Category:** Visa Consultant / Immigration Attorney
 - [ ] Embed confirmed Google Maps iframe on the `/contact` page.
 

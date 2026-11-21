@@ -152,7 +152,7 @@ export default function ApplyPage() {
                     required
                     value={formData.whatsapp}
                     onChange={handleChange}
-                    placeholder="+91 98765 43210"
+                    placeholder="+48 537 623 077"
                     className="w-full p-3.5 rounded-xl bg-midnight border border-champagne/20 text-cloud text-sm focus:outline-none focus:border-champagne"
                   />
                 </div>

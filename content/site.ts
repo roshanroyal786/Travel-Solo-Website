@@ -6,8 +6,8 @@ export const siteConfig = {
   description:
     "Direct visa consultancy based in Dwarka, New Delhi. Specialized in Czech Republic, Malaysia, Russia, Slovenia, and Singapore. Study, work, tourist, and business visas filed directly with zero sub-agents.",
   url: process.env.NEXT_PUBLIC_SITE_URL || "https://travelsolo.in",
-  phone: "+91 98712 34567",
-  whatsappNumber: "919871234567",
+  phone: "+48 537 623 077",
+  whatsappNumber: "48537623077",
   email: "hello@travelsolo.in",
   address: {
     line1: "Plot 14, Sector 12 Dwarka",
