@@ -1,10 +1,10 @@
 "use client";
 
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { motion } from "motion/react";
-import { ArrowUpRight, ShieldCheck, Star } from "lucide-react";
+import { ArrowUpRight, ShieldCheck, Star, ArrowRight } from "lucide-react";
 import { buildWhatsAppLink } from "@/lib/whatsapp";
 
 export type AvatarList = {
@@ -16,18 +16,29 @@ type HeroSectionProps = {
 };
 
 export default function HeroSection({ avatarList }: HeroSectionProps) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.defaultMuted = true;
+      videoRef.current.muted = true;
+      videoRef.current.play().catch(() => {});
+    }
+  }, []);
+
   return (
-    <section className="relative overflow-hidden pt-8 pb-12 md:pt-16 md:pb-16 min-h-[85vh] flex flex-col justify-center bg-slate-100">
-      {/* Background Scenic Aerial Airplane Window Video */}
+    <section className="relative overflow-hidden pt-8 pb-12 md:pt-16 md:pb-20 min-h-[88vh] flex flex-col justify-center bg-slate-950">
+      {/* Real Scenic Aerial Airplane Window Video Background */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
         <video
+          ref={videoRef}
           autoPlay
           muted
           loop
           playsInline
           preload="auto"
           aria-hidden="true"
-          className="w-full h-full object-cover object-center scale-105"
+          className="w-full h-full object-cover object-center scale-100"
         >
           <source src="/videos/airplane-window.mp4" type="video/mp4" />
           <source
@@ -36,9 +47,11 @@ export default function HeroSection({ avatarList }: HeroSectionProps) {
           />
         </video>
 
-        {/* Optical Glass Contrast Overlay: Preserves the scenic airplane window while guaranteeing 100% WCAG AAA Text Legibility */}
-        <div className="absolute inset-0 bg-gradient-to-b from-white/85 via-white/70 to-white/95 backdrop-blur-[2px]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-white/40 via-white/70 to-white/90" />
+        {/* Cinematic Scrim: Keeps the airplane window seat crystal clear while ensuring crisp text readability */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/25 to-black/60" />
+
+        {/* Bottom smooth light-theme blend */}
+        <div className="absolute bottom-0 left-0 right-0 h-28 bg-gradient-to-t from-white via-white/80 to-transparent" />
       </div>
 
       <div className="w-full h-full relative z-10">
@@ -50,10 +63,10 @@ export default function HeroSection({ avatarList }: HeroSectionProps) {
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, ease: "easeOut" }}
-                className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/95 backdrop-blur-md border border-slate-300/80 text-primary text-xs font-medium shadow-md"
+                className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-900/65 backdrop-blur-md border border-white/25 text-white text-xs font-medium shadow-xl"
               >
-                <ShieldCheck className="w-4 h-4 text-primary" />
-                <span className="font-semibold text-slate-900 tracking-wide">
+                <ShieldCheck className="w-4 h-4 text-sky-400" />
+                <span className="font-semibold text-white tracking-wide drop-shadow-sm">
                   Registered in Dwarka, New Delhi · Direct Consultants · Zero Sub-Agents
                 </span>
               </motion.div>
@@ -63,10 +76,10 @@ export default function HeroSection({ avatarList }: HeroSectionProps) {
                 initial={{ opacity: 0, y: 32 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.9, ease: "easeInOut" }}
-                className="font-display text-4xl sm:text-6xl md:text-7xl lg:text-[5.2rem] font-medium leading-[1.08] tracking-tight text-slate-950 max-w-4xl drop-shadow-[0_2px_14px_rgba(255,255,255,0.95)]"
+                className="font-display text-4xl sm:text-6xl md:text-7xl lg:text-[5.2rem] font-medium leading-[1.08] tracking-tight text-white max-w-4xl drop-shadow-[0_4px_16px_rgba(0,0,0,0.85)]"
               >
                 Your next chapter starts at the{" "}
-                <span className="italic font-normal text-primary drop-shadow-[0_2px_12px_rgba(255,255,255,0.9)]">
+                <span className="italic font-normal text-sky-300 drop-shadow-[0_4px_16px_rgba(0,0,0,0.9)]">
                   window seat.
                 </span>
               </motion.h1>
@@ -76,7 +89,7 @@ export default function HeroSection({ avatarList }: HeroSectionProps) {
                 initial={{ opacity: 0, y: 32 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.9, delay: 0.1, ease: "easeInOut" }}
-                className="text-base sm:text-lg md:text-xl font-normal max-w-2xl text-slate-800 leading-relaxed drop-shadow-[0_1px_8px_rgba(255,255,255,0.9)]"
+                className="text-base sm:text-lg md:text-xl font-normal max-w-2xl text-white leading-relaxed drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]"
               >
                 Visa consultancy for Czech Republic, Malaysia, Russia, Slovenia, and Singapore.
                 Study, work, tourist, and business visas filed directly with zero middleman sub-agents.
@@ -95,25 +108,25 @@ export default function HeroSection({ avatarList }: HeroSectionProps) {
                 href={buildWhatsAppLink({ type: "quote" })}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="relative inline-flex items-center text-sm font-semibold rounded-full h-13 ps-7 pe-16 group transition-all duration-500 bg-primary text-white hover:bg-primary/95 shadow-xl shadow-primary/25 hover:ps-16 hover:pe-7 overflow-hidden cursor-pointer"
+                className="relative inline-flex items-center text-sm font-semibold rounded-full h-13 ps-7 pe-16 group transition-all duration-500 bg-sky-500 hover:bg-sky-400 text-slate-950 shadow-2xl hover:shadow-sky-500/40 hover:ps-16 hover:pe-7 overflow-hidden cursor-pointer"
               >
-                <span className="relative z-10 transition-all duration-500 whitespace-nowrap">
+                <span className="relative z-10 transition-all duration-500 whitespace-nowrap font-bold">
                   Get a Quote on WhatsApp
                 </span>
-                <span className="absolute right-1.5 w-10 h-10 bg-white text-primary rounded-full flex items-center justify-center transition-all duration-500 group-hover:right-[calc(100%-46px)] group-hover:rotate-45 shadow-sm">
+                <span className="absolute right-1.5 w-10 h-10 bg-slate-950 text-white rounded-full flex items-center justify-center transition-all duration-500 group-hover:right-[calc(100%-46px)] group-hover:rotate-45 shadow-sm">
                   <ArrowUpRight size={18} />
                 </span>
               </a>
 
               <Link
                 href="/tools/eligibility-checker"
-                className="text-sm font-semibold text-slate-800 hover:text-slate-950 transition-colors px-6 py-3.5 rounded-full border border-slate-300 bg-white/95 hover:bg-white backdrop-blur-md shadow-md"
+                className="text-sm font-semibold text-slate-900 hover:text-slate-950 transition-colors px-6 py-3.5 rounded-full border border-slate-300 bg-white/95 hover:bg-white backdrop-blur-md shadow-xl"
               >
                 Check My Eligibility (60s) &rarr;
               </Link>
 
               {/* Social Proof Avatars & Stars */}
-              <div className="flex items-center sm:gap-5 gap-3 py-1.5 px-4 rounded-full bg-white/90 backdrop-blur-md border border-slate-200/90 shadow-sm">
+              <div className="flex items-center sm:gap-5 gap-3 py-1.5 px-4 rounded-full bg-slate-900/65 backdrop-blur-md border border-white/20 shadow-xl">
                 <ul className="avatar flex flex-row items-center">
                   {avatarList.map((avatar, index) => (
                     <li key={index} className="-mr-2.5 z-1 hover:z-10 transition-transform">
@@ -128,13 +141,13 @@ export default function HeroSection({ avatarList }: HeroSectionProps) {
                   ))}
                 </ul>
                 <div className="gap-0.5 flex flex-col items-start text-left">
-                  <div className="flex gap-1 text-amber-500">
+                  <div className="flex gap-1 text-amber-400">
                     {Array.from({ length: 5 }).map((_, index) => (
                       <Star key={index} className="w-4 h-4 fill-amber-400 text-amber-400" />
                     ))}
                   </div>
-                  <p className="text-xs font-medium text-slate-700">
-                    <span className="font-bold text-slate-900">257+ applicants</span> · 98% approved
+                  <p className="text-xs font-medium text-slate-200">
+                    <span className="font-bold text-white">257+ applicants</span> · 98% approved
                   </p>
                 </div>
               </div>
