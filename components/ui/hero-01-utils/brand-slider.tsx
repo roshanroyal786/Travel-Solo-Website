@@ -23,12 +23,11 @@ export default function BrandSlider({ brandList }: { brandList: BrandList[] }) {
             className="flex flex-col gap-3"
           >
             <div className="flex justify-center text-center py-3 md:py-4 relative">
-              <div className="flex items-center justify-center gap-4">
-                <div className="hidden md:block h-px w-36 bg-gradient-to-r from-transparent via-slate-300 to-slate-400 opacity-60" />
-                <p className="text-xs uppercase tracking-widest font-semibold text-slate-500 text-center">
+              <div className="inline-flex items-center gap-2.5 px-6 py-2.5 rounded-full bg-slate-900/90 sm:bg-white/95 backdrop-blur-md border border-sky-400/50 sm:border-slate-300 shadow-[0_4px_24px_rgba(0,0,0,0.25)] sm:shadow-[0_4px_20px_rgba(0,90,156,0.12)] transition-all">
+                <span className="w-2 h-2 rounded-full bg-sky-400 animate-ping shrink-0" />
+                <span className="text-xs sm:text-sm font-bold uppercase tracking-wider text-white sm:text-slate-900 drop-shadow-xs whitespace-nowrap">
                   Direct Consular Filings · 5 Specialized Global Hubs · Zero Sub-Agents
-                </p>
-                <div className="hidden md:block h-px w-36 bg-gradient-to-l from-transparent via-slate-300 to-slate-400 opacity-60" />
+                </span>
               </div>
             </div>
             {brandList && brandList.length > 0 && (
