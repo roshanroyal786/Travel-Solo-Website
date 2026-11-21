@@ -386,43 +386,43 @@ export default function GlobeSection() {
       const pulseRadius = ((pulsePhase % 1) * 22 + 6) * dpr;
       const pulseAlpha = Math.max(0, 1 - (pulsePhase % 1));
 
-      // New Delhi Pin (Sky Blue & Ice Cyan)
+      // New Delhi Pin (Coral Orange with White Border from reference globe)
       if (pDelhi.visible) {
         ctx.beginPath();
-        ctx.arc(pDelhi.x, pDelhi.y, 5 * dpr, 0, Math.PI * 2);
-        ctx.fillStyle = "#60C1E5";
+        ctx.arc(pDelhi.x, pDelhi.y, 6 * dpr, 0, Math.PI * 2);
+        ctx.fillStyle = "#F87171"; // Coral red-orange
         ctx.fill();
         ctx.strokeStyle = "#FFFFFF";
-        ctx.lineWidth = 1.5 * dpr;
+        ctx.lineWidth = 2 * dpr;
         ctx.stroke();
 
-        ctx.fillStyle = "#A0E0EF";
+        ctx.fillStyle = "#FCA5A5";
         ctx.font = `bold ${10 * dpr}px monospace`;
         ctx.fillText("DELHI (ORIGIN)", pDelhi.x + 8 * dpr, pDelhi.y - 6 * dpr);
       }
 
-      // Target Pin (Centered in middle of globe)
+      // Target Pin (Warm Cream/Yellow with White Border from reference globe)
       if (pDest.visible) {
         // Expanding radar rings
         ctx.beginPath();
         ctx.arc(pDest.x, pDest.y, pulseRadius, 0, Math.PI * 2);
-        ctx.strokeStyle = `rgba(96, 193, 229, ${pulseAlpha * 0.85})`;
+        ctx.strokeStyle = `rgba(253, 230, 138, ${pulseAlpha * 0.85})`;
         ctx.lineWidth = 1.5 * dpr;
         ctx.stroke();
 
         ctx.beginPath();
         ctx.arc(pDest.x, pDest.y, pulseRadius * 0.55, 0, Math.PI * 2);
-        ctx.strokeStyle = `rgba(160, 224, 239, ${pulseAlpha * 0.6})`;
+        ctx.strokeStyle = `rgba(254, 243, 199, ${pulseAlpha * 0.6})`;
         ctx.lineWidth = 1.2 * dpr;
         ctx.stroke();
 
-        // Pin Solid Head
+        // Pin Solid Head (Warm cream/gold)
         ctx.beginPath();
         ctx.arc(pDest.x, pDest.y, 7 * dpr, 0, Math.PI * 2);
-        ctx.fillStyle = "#60C1E5";
+        ctx.fillStyle = "#FDE68A";
         ctx.fill();
         ctx.strokeStyle = "#FFFFFF";
-        ctx.lineWidth = 2 * dpr;
+        ctx.lineWidth = 2.5 * dpr;
         ctx.stroke();
 
         // Crosshair reticle around the center target
