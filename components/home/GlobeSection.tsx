@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { countries } from "@/content/countries";
-import { Plane, MapPin, ArrowRight } from "lucide-react";
+import { Plane, MapPin, ArrowRight, Compass, Radio } from "lucide-react";
 
 interface Stop {
   id: string;
@@ -13,6 +13,7 @@ interface Stop {
   lon: number;
   tagline: string;
   slug: string;
+  code: string;
 }
 
 const stops: Stop[] = [
@@ -24,6 +25,7 @@ const stops: Stop[] = [
     lon: 77.209,
     tagline: "Where every file is audited and managed directly. No sub-agents.",
     slug: "",
+    code: "DEL",
   },
   {
     id: "cz",
@@ -33,6 +35,7 @@ const stops: Stop[] = [
     lon: 14.4378,
     tagline: "Schengen Employee Cards and respected engineering colleges in Central Europe.",
     slug: "czech-republic",
+    code: "PRG",
   },
   {
     id: "my",
@@ -42,6 +45,7 @@ const stops: Stop[] = [
     lon: 101.6869,
     tagline: "Fast 48-hour eVisas, MDEC IT passes, and British university campuses.",
     slug: "malaysia",
+    code: "KUL",
   },
   {
     id: "ru",
@@ -51,6 +55,7 @@ const stops: Stop[] = [
     lon: 37.6173,
     tagline: "NMC-approved MBBS admissions, commercial trade ties, and unified e-visas.",
     slug: "russia",
+    code: "SVO",
   },
   {
     id: "si",
@@ -60,6 +65,7 @@ const stops: Stop[] = [
     lon: 14.5058,
     tagline: "Combined Work & Residence Single Permit in Europe's peaceful alpine heart.",
     slug: "slovenia",
+    code: "LJU",
   },
   {
     id: "sg",
@@ -69,158 +75,82 @@ const stops: Stop[] = [
     lon: 103.8198,
     tagline: "High-paying Employment Passes evaluated against the COMPASS framework.",
     slug: "singapore",
+    code: "SIN",
   },
 ];
 
+const VIDEO_URL =
+  "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260912_104036_bd6924f6-3c8e-417e-8465-6d03c8c2e9e6.mp4";
+const POSTER_URL =
+  "https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/82e7eb75-c65f-490a-99b5-f3d1cad54200.webp";
+
 export default function GlobeSection() {
   const [activeStopIndex, setActiveStopIndex] = useState(1);
-  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const [activeVideo, setActiveVideo] = useState<"A" | "B">("A");
+
+  const videoARef = useRef<HTMLVideoElement | null>(null);
+  const videoBRef = useRef<HTMLVideoElement | null>(null);
 
   const activeStop = stops[activeStopIndex];
 
-  // Draw interactive flight trajectory from New Delhi to Destination on HTML5 Canvas
+  // Seamless Dual-Video Crossfade at the loop boundary
   useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
+    const vA = videoARef.current;
+    const vB = videoBRef.current;
+    if (!vA || !vB) return;
 
-    let animationFrameId: number;
-    let progress = 0;
+    const FADE = 0.9;
+    let cur = vA;
+    let nxt = vB;
+    let swapping = false;
 
-    const render = () => {
-      const width = canvas.width;
-      const height = canvas.height;
-
-      ctx.clearRect(0, 0, width, height);
-
-      // Background globe circle
-      const centerX = width / 2;
-      const centerY = height / 2;
-      const radius = Math.min(width, height) * 0.42;
-
-      // Outer glow atmosphere
-      const glowGrad = ctx.createRadialGradient(centerX, centerY, radius * 0.8, centerX, centerY, radius * 1.15);
-      glowGrad.addColorStop(0, "rgba(27, 58, 107, 0.4)");
-      glowGrad.addColorStop(0.7, "rgba(230, 196, 138, 0.12)");
-      glowGrad.addColorStop(1, "rgba(10, 16, 32, 0)");
-      ctx.fillStyle = glowGrad;
-      ctx.beginPath();
-      ctx.arc(centerX, centerY, radius * 1.15, 0, Math.PI * 2);
-      ctx.fill();
-
-      // Base globe sphere
-      const sphereGrad = ctx.createRadialGradient(
-        centerX - radius * 0.3,
-        centerY - radius * 0.3,
-        radius * 0.1,
-        centerX,
-        centerY,
-        radius
-      );
-      sphereGrad.addColorStop(0, "#1B3A6B");
-      sphereGrad.addColorStop(0.7, "#0d1b33");
-      sphereGrad.addColorStop(1, "#0A1020");
-      ctx.fillStyle = sphereGrad;
-      ctx.beginPath();
-      ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.strokeStyle = "rgba(230, 196, 138, 0.35)";
-      ctx.lineWidth = 1.5;
-      ctx.stroke();
-
-      // Latitude and Longitude Grid Lines
-      ctx.strokeStyle = "rgba(169, 180, 200, 0.12)";
-      ctx.lineWidth = 1;
-      for (let i = -60; i <= 60; i += 30) {
-        ctx.beginPath();
-        const y = centerY + (i / 90) * radius;
-        const rAtY = Math.sqrt(Math.max(0, radius * radius - Math.pow((i / 90) * radius, 2)));
-        ctx.ellipse(centerX, y, rAtY, rAtY * 0.3, 0, 0, Math.PI * 2);
-        ctx.stroke();
-      }
-
-      // Convert lat/lon to 2D projection on current visible face
-      const project = (lat: number, lon: number) => {
-        // Center projection around active destination longitude
-        const centerLon = activeStop.lon;
-        const radLat = (lat * Math.PI) / 180;
-        const radLon = ((lon - centerLon) * Math.PI) / 180;
-
-        const x = centerX + radius * Math.cos(radLat) * Math.sin(radLon) * 0.95;
-        const y = centerY - radius * Math.sin(radLat) * 0.95;
-        const visible = Math.cos(radLat) * Math.cos(radLon) > -0.2;
-        return { x, y, visible };
-      };
-
-      const delhi = project(28.6139, 77.209);
-      const dest = project(activeStop.lat, activeStop.lon);
-
-      // Draw Flight Arc from Delhi to Active Destination
-      if (delhi.visible || dest.visible) {
-        const midX = (delhi.x + dest.x) / 2;
-        const midY = Math.min(delhi.y, dest.y) - 60;
-
-        // Background arc line
-        ctx.beginPath();
-        ctx.moveTo(delhi.x, delhi.y);
-        ctx.quadraticCurveTo(midX, midY, dest.x, dest.y);
-        ctx.strokeStyle = "rgba(230, 196, 138, 0.25)";
-        ctx.setLineDash([4, 4]);
-        ctx.lineWidth = 2;
-        ctx.stroke();
-        ctx.setLineDash([]);
-
-        // Animated progress arc
-        progress += 0.015;
-        if (progress > 1) progress = 0;
-
-        // Current plane position along Bezier curve
-        const t = progress;
-        const curX = Math.pow(1 - t, 2) * delhi.x + 2 * (1 - t) * t * midX + Math.pow(t, 2) * dest.x;
-        const curY = Math.pow(1 - t, 2) * delhi.y + 2 * (1 - t) * t * midY + Math.pow(t, 2) * dest.y;
-
-        // Glowing plane beacon
-        ctx.beginPath();
-        ctx.arc(curX, curY, 4, 0, Math.PI * 2);
-        ctx.fillStyle = "#FF6B4A";
-        ctx.shadowColor = "#FF6B4A";
-        ctx.shadowBlur = 10;
-        ctx.fill();
-        ctx.shadowBlur = 0;
-      }
-
-      // Draw Delhi Pin
-      ctx.beginPath();
-      ctx.arc(delhi.x, delhi.y, 6, 0, Math.PI * 2);
-      ctx.fillStyle = "#E6C48A";
-      ctx.fill();
-      ctx.strokeStyle = "#FFFFFF";
-      ctx.lineWidth = 2;
-      ctx.stroke();
-
-      // Draw Destination Pin
-      if (activeStop.id !== "delhi") {
-        ctx.beginPath();
-        ctx.arc(dest.x, dest.y, 7, 0, Math.PI * 2);
-        ctx.fillStyle = "#FF6B4A";
-        ctx.fill();
-        ctx.strokeStyle = "#FFFFFF";
-        ctx.lineWidth = 2;
-        ctx.stroke();
-      }
-
-      animationFrameId = requestAnimationFrame(render);
+    const playSafe = (vid: HTMLVideoElement) => {
+      vid.play().catch(() => {});
     };
 
-    render();
+    playSafe(vA);
 
-    return () => cancelAnimationFrame(animationFrameId);
-  }, [activeStop, activeStopIndex]);
+    const tick = () => {
+      if (swapping || !cur.duration) return;
+      if (cur.duration - cur.currentTime > FADE) return;
+
+      swapping = true;
+      const out = cur;
+      nxt.currentTime = 0;
+      playSafe(nxt);
+
+      if (nxt === vA) {
+        setActiveVideo("A");
+      } else {
+        setActiveVideo("B");
+      }
+
+      cur = nxt;
+      nxt = out;
+
+      setTimeout(() => {
+        out.pause();
+        out.currentTime = 0;
+        swapping = false;
+      }, FADE * 1000 + 100);
+    };
+
+    vA.addEventListener("timeupdate", tick);
+    vB.addEventListener("timeupdate", tick);
+
+    return () => {
+      vA.removeEventListener("timeupdate", tick);
+      vB.removeEventListener("timeupdate", tick);
+    };
+  }, []);
 
   return (
     <section className="py-24 bg-midnight border-t border-champagne/10 relative overflow-hidden">
-      <div className="max-w-[1280px] mx-auto px-6">
+      {/* Background ambient lighting */}
+      <div className="absolute top-1/2 left-1/3 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-horizon/20 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute bottom-10 right-1/4 w-[350px] h-[350px] bg-[#6d28d9]/10 rounded-full blur-[120px] pointer-events-none" />
+
+      <div className="max-w-[1280px] mx-auto px-6 relative z-10">
         <div className="text-center max-w-2xl mx-auto mb-16">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-horizon/40 border border-champagne/20 text-champagne text-xs font-mono uppercase mb-4">
             <Plane className="w-3.5 h-3.5 text-champagne" />
@@ -234,13 +164,13 @@ export default function GlobeSection() {
           </p>
         </div>
 
-        {/* Destination Tabs */}
-        <div className="flex flex-wrap items-center justify-center gap-2 mb-12">
+        {/* Destination Selector Tabs */}
+        <div className="flex flex-wrap items-center justify-center gap-2 mb-14">
           {stops.map((stop, idx) => (
             <button
               key={stop.id}
               onClick={() => setActiveStopIndex(idx)}
-              className={`px-4 py-2 rounded-full text-xs font-semibold tracking-wide transition-all ${
+              className={`px-4 py-2 rounded-full text-xs font-semibold tracking-wide transition-all cursor-pointer ${
                 activeStopIndex === idx
                   ? "bg-champagne text-midnight shadow-lg scale-105"
                   : "bg-horizon/30 text-mist hover:text-cloud hover:bg-horizon/50 border border-champagne/10"
@@ -251,17 +181,73 @@ export default function GlobeSection() {
           ))}
         </div>
 
-        {/* Interactive Globe Display & Active Stop Card */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-          {/* Globe Canvas */}
+        {/* 3D Rotating Dot-Matrix Globe Display & Active Stop Card */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+          {/* 3D Dot-Matrix Globe Display */}
           <div className="lg:col-span-7 flex justify-center items-center">
-            <div className="relative w-full max-w-[480px] aspect-square flex items-center justify-center">
-              <canvas
-                ref={canvasRef}
-                width={500}
-                height={500}
-                className="w-full h-full max-w-[480px] rounded-full cursor-grab active:cursor-grabbing"
-              />
+            <div className="relative w-full max-w-[500px] aspect-square flex items-center justify-center">
+              {/* Outer atmospheric aura ring */}
+              <div className="absolute -inset-4 rounded-full bg-gradient-to-tr from-horizon/40 via-[#7c3aed]/20 to-champagne/20 blur-xl opacity-70 animate-pulse pointer-events-none" />
+
+              {/* Main Globe Masked Sphere Container */}
+              <div className="relative w-full h-full rounded-full overflow-hidden border border-champagne/30 shadow-[0_0_90px_rgba(124,58,237,0.3)] bg-black">
+                {/* Video A */}
+                <video
+                  ref={videoARef}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  preload="auto"
+                  disablePictureInPicture
+                  poster={POSTER_URL}
+                  aria-hidden="true"
+                  className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-[900ms] linear ${
+                    activeVideo === "A" ? "opacity-100" : "opacity-0"
+                  }`}
+                  style={{ objectPosition: "50% 50%" }}
+                >
+                  <source src={VIDEO_URL} type="video/mp4" />
+                </video>
+
+                {/* Video B (Seamless Crossfade at Loop Point) */}
+                <video
+                  ref={videoBRef}
+                  muted
+                  loop
+                  playsInline
+                  preload="auto"
+                  disablePictureInPicture
+                  poster={POSTER_URL}
+                  aria-hidden="true"
+                  className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-[900ms] linear ${
+                    activeVideo === "B" ? "opacity-100" : "opacity-0"
+                  }`}
+                  style={{ objectPosition: "50% 50%" }}
+                >
+                  <source src={VIDEO_URL} type="video/mp4" />
+                </video>
+
+                {/* Internal Spherical Shadow & Atmospheric Vignette */}
+                <div className="absolute inset-0 rounded-full pointer-events-none shadow-[inset_0_0_80px_rgba(0,0,0,0.85)] ring-1 ring-inset ring-white/15" />
+                <div className="absolute inset-0 rounded-full pointer-events-none bg-gradient-to-t from-midnight/70 via-transparent to-transparent opacity-80" />
+
+                {/* Live Flight Telemetry Overlay */}
+                <div className="absolute top-6 left-6 right-6 flex items-center justify-between text-[11px] font-mono text-champagne/90 pointer-events-none z-10 bg-midnight/60 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-champagne/20">
+                  <div className="flex items-center gap-1.5">
+                    <Radio className="w-3 h-3 text-coral animate-pulse" />
+                    <span>CORRIDOR: DEL &rarr; {activeStop.code}</span>
+                  </div>
+                  <span>{activeStop.lat.toFixed(2)}°N, {activeStop.lon.toFixed(2)}°E</span>
+                </div>
+
+                {/* Radial Target Beacon at Center */}
+                <div className="absolute bottom-6 left-1/2 -translate-x-1/2 pointer-events-none z-10 text-center">
+                  <span className="text-[10px] font-mono uppercase tracking-widest text-mist/80 bg-midnight/80 px-3 py-1 rounded-full border border-champagne/15 backdrop-blur-sm">
+                    {activeStop.city} Active
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
 
