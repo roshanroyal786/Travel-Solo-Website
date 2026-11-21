@@ -1,79 +1,122 @@
 @import "tailwindcss";
 
+@theme {
+  --font-sans: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-poppins: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-playfair: 'Playfair Display', Georgia, serif;
+
+  --color-midnight: #08111E;
+  --color-navy: #1B365D;
+  --color-horizon: #005A9C;
+  --color-sky: #60C1E5;
+  --color-ice: #A0E0EF;
+  --color-champagne: #60C1E5;
+  --color-coral: #005A9C;
+  --color-cloud: #F0F8FF;
+  --color-mist: #94B4D1;
+  --color-whatsapp: #25D366;
+}
+
 @layer base {
   :root {
-    --font-inter: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    --font-fraunces: 'Fraunces', Georgia, serif;
-    --color-midnight: #0A1020;
-    --color-horizon: #1B3A6B;
-    --color-champagne: #E6C48A;
-    --color-coral: #FF6B4A;
-    --color-cloud: #F6F3EE;
-    --color-mist: #A9B4C8;
+    --font-poppins: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-playfair: 'Playfair Display', Georgia, serif;
+    --font-sans: var(--font-poppins);
+    --font-display: var(--font-playfair);
+
+    --color-midnight: #08111E;
+    --color-navy: #1B365D;
+    --color-horizon: #005A9C;
+    --color-sky: #60C1E5;
+    --color-ice: #A0E0EF;
+    --color-champagne: #60C1E5;
+    --color-coral: #005A9C;
+    --color-cloud: #F0F8FF;
+    --color-mist: #94B4D1;
     --color-whatsapp: #25D366;
   }
 
   body {
     background-color: var(--color-midnight);
-    color: #F6F3EE;
-    font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
+    color: var(--color-cloud);
+    font-family: var(--font-poppins), system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
     line-height: 1.6;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
-  h1, h2, h3, .font-display {
-    font-family: var(--font-fraunces), serif;
+  h1, h2, h3, h4, h5, h6, .font-display, .font-serif {
+    font-family: var(--font-playfair), Georgia, serif;
   }
 }
 
-/* Custom Utilities */
-.bg-midnight { background-color: #0A1020; }
-.bg-horizon { background-color: #1B3A6B; }
-.bg-champagne { background-color: #E6C48A; }
-.bg-coral { background-color: #FF6B4A; }
-.bg-cloud { background-color: #F6F3EE; }
-.bg-mist { background-color: #A9B4C8; }
+/* Palette 1 Custom Utilities */
+.bg-midnight { background-color: #08111E; }
+.bg-navy { background-color: #1B365D; }
+.bg-horizon { background-color: #005A9C; }
+.bg-sky { background-color: #60C1E5; }
+.bg-ice { background-color: #A0E0EF; }
+.bg-champagne { background-color: #60C1E5; }
+.bg-coral { background-color: #005A9C; }
+.bg-cloud { background-color: #F0F8FF; }
+.bg-mist { background-color: #94B4D1; }
 .bg-whatsapp { background-color: #25D366; }
 
-.text-midnight { color: #0A1020; }
-.text-horizon { color: #1B3A6B; }
-.text-champagne { color: #E6C48A; }
-.text-coral { color: #FF6B4A; }
-.text-cloud { color: #F6F3EE; }
-.text-mist { color: #A9B4C8; }
+.text-midnight { color: #08111E; }
+.text-navy { color: #1B365D; }
+.text-horizon { color: #005A9C; }
+.text-sky { color: #60C1E5; }
+.text-ice { color: #A0E0EF; }
+.text-champagne { color: #60C1E5; }
+.text-coral { color: #60C1E5; }
+.text-cloud { color: #F0F8FF; }
+.text-mist { color: #94B4D1; }
 .text-whatsapp { color: #25D366; }
 
-.border-midnight { border-color: #0A1020; }
-.border-horizon { border-color: #1B3A6B; }
-.border-champagne { border-color: #E6C48A; }
-.border-coral { border-color: #FF6B4A; }
-.border-cloud { border-color: #F6F3EE; }
-.border-mist { border-color: #A9B4C8; }
+.border-midnight { border-color: #08111E; }
+.border-navy { border-color: #1B365D; }
+.border-horizon { border-color: #005A9C; }
+.border-sky { border-color: #60C1E5; }
+.border-ice { border-color: #A0E0EF; }
+.border-champagne { border-color: #60C1E5; }
+.border-coral { border-color: #005A9C; }
+.border-cloud { border-color: #F0F8FF; }
+.border-mist { border-color: #94B4D1; }
+
+.font-poppins, .font-sans {
+  font-family: var(--font-poppins), system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.font-playfair, .font-display, .font-serif {
+  font-family: var(--font-playfair), Georgia, serif;
+}
 
 .tabular-nums {
   font-variant-numeric: tabular-nums;
 }
 
-/* Glassmorphism */
+/* Glassmorphism tuned to Palette 1 */
 .glass-nav {
-  background: rgba(10, 16, 32, 0.85);
+  background: rgba(8, 17, 30, 0.88);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(230, 196, 138, 0.15);
+  border-bottom: 1px solid rgba(96, 193, 229, 0.16);
 }
 
 .glass-card {
-  background: rgba(27, 58, 107, 0.18);
+  background: rgba(27, 54, 93, 0.28);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(230, 196, 138, 0.12);
+  border: 1px solid rgba(96, 193, 229, 0.18);
 }
 
 .glass-card-light {
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(240, 248, 255, 0.95);
   backdrop-filter: blur(12px);
-  border: 1px solid rgba(10, 16, 32, 0.08);
+  border: 1px solid rgba(27, 54, 93, 0.12);
 }
 
 /* Pulse animation for WhatsApp */

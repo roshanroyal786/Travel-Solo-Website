@@ -153,24 +153,24 @@ export default function GlobeSection() {
         const sx = (star.x / 100) * width;
         const sy = (star.y / 100) * height;
         const twinkle = Math.sin(starClock * star.speed + star.x) * 0.3 + 0.7;
-        ctx.fillStyle = `rgba(196, 181, 253, ${star.alpha * twinkle * 0.7})`;
+        ctx.fillStyle = `rgba(160, 224, 239, ${star.alpha * twinkle * 0.75})`;
         ctx.beginPath();
         ctx.arc(sx, sy, star.size * dpr, 0, Math.PI * 2);
         ctx.fill();
       });
 
-      // 2. Violet-Champagne Atmospheric Rim Aura
+      // 2. Palette 1 Atmospheric Rim Aura (Royal Cobalt & Sky Blue)
       const auraGrad = ctx.createRadialGradient(cx, cy, R * 0.85, cx, cy, R * 1.28);
-      auraGrad.addColorStop(0, "rgba(124, 58, 237, 0.40)"); // Deep violet glow
-      auraGrad.addColorStop(0.4, "rgba(167, 139, 250, 0.20)"); // Lavender aura
-      auraGrad.addColorStop(0.75, "rgba(230, 196, 138, 0.12)"); // Champagne edge
-      auraGrad.addColorStop(1, "rgba(10, 16, 32, 0)");
+      auraGrad.addColorStop(0, "rgba(0, 90, 156, 0.45)"); // Horizon royal cobalt
+      auraGrad.addColorStop(0.4, "rgba(96, 193, 229, 0.25)"); // Sky blue glow
+      auraGrad.addColorStop(0.75, "rgba(160, 224, 239, 0.15)"); // Ice blue edge
+      auraGrad.addColorStop(1, "rgba(8, 17, 30, 0)");
       ctx.fillStyle = auraGrad;
       ctx.beginPath();
       ctx.arc(cx, cy, R * 1.28, 0, Math.PI * 2);
       ctx.fill();
 
-      // 3. Spherical Globe Body
+      // 3. Spherical Globe Body (Navy to Deep Midnight)
       const globeGrad = ctx.createRadialGradient(
         cx - R * 0.35,
         cy - R * 0.35,
@@ -179,22 +179,22 @@ export default function GlobeSection() {
         cy,
         R
       );
-      globeGrad.addColorStop(0, "#191e38");
-      globeGrad.addColorStop(0.5, "#0c1224");
-      globeGrad.addColorStop(0.85, "#070b18");
-      globeGrad.addColorStop(1, "#03060d");
+      globeGrad.addColorStop(0, "#1B365D"); // Palette 1 Tier 1 Navy
+      globeGrad.addColorStop(0.45, "#0f2342");
+      globeGrad.addColorStop(0.8, "#091424");
+      globeGrad.addColorStop(1, "#050b14");
       ctx.fillStyle = globeGrad;
       ctx.beginPath();
       ctx.arc(cx, cy, R, 0, Math.PI * 2);
       ctx.fill();
 
       // Specular Perimeter Edge Ring
-      ctx.strokeStyle = "rgba(196, 181, 253, 0.45)";
+      ctx.strokeStyle = "rgba(96, 193, 229, 0.50)";
       ctx.lineWidth = 1.5 * dpr;
       ctx.stroke();
 
       // Outer thin orbital guide ring
-      ctx.strokeStyle = "rgba(230, 196, 138, 0.15)";
+      ctx.strokeStyle = "rgba(160, 224, 239, 0.20)";
       ctx.lineWidth = 1 * dpr;
       ctx.beginPath();
       ctx.arc(cx, cy, R + 16 * dpr, 0, Math.PI * 2);
@@ -265,8 +265,8 @@ export default function GlobeSection() {
         }
         ctx.strokeStyle =
           lat === 0
-            ? "rgba(230, 196, 138, 0.25)" // Equator in champagne
-            : "rgba(167, 139, 250, 0.12)"; // Parallels in soft violet
+            ? "rgba(96, 193, 229, 0.35)" // Equator in Palette 1 Sky Blue
+            : "rgba(0, 90, 156, 0.18)"; // Parallels in Royal Cobalt
         ctx.stroke();
       });
 
@@ -287,7 +287,7 @@ export default function GlobeSection() {
             started = false;
           }
         }
-        ctx.strokeStyle = "rgba(167, 139, 250, 0.10)";
+        ctx.strokeStyle = "rgba(0, 90, 156, 0.14)";
         ctx.stroke();
       }
 
@@ -303,11 +303,11 @@ export default function GlobeSection() {
 
           let fillColor: string;
           if (Math.abs(lat) < 15 && i % 4 === 0) {
-            fillColor = `rgba(230, 196, 138, ${alpha})`; // Champagne accents
-          } else if (depth > 0.7) {
-            fillColor = `rgba(216, 180, 254, ${alpha})`; // Bright luminous lavender
+            fillColor = `rgba(160, 224, 239, ${alpha})`; // Palette 1 Tier 4 Ice Cyan accents
+          } else if (depth > 0.65) {
+            fillColor = `rgba(96, 193, 229, ${alpha})`; // Palette 1 Tier 3 Vibrant Sky Blue
           } else {
-            fillColor = `rgba(167, 139, 250, ${alpha * 0.85})`; // Violet depth dots
+            fillColor = `rgba(0, 90, 156, ${alpha * 0.85})`; // Palette 1 Tier 2 Royal Cobalt Blue depth dots
           }
 
           ctx.fillStyle = fillColor;
@@ -353,7 +353,7 @@ export default function GlobeSection() {
         }
       });
       ctx.setLineDash([4 * dpr, 4 * dpr]);
-      ctx.strokeStyle = "rgba(230, 196, 138, 0.45)"; // Dashed champagne flight path
+      ctx.strokeStyle = "rgba(96, 193, 229, 0.75)"; // Dashed Sky Blue flight path
       ctx.lineWidth = 1.8 * dpr;
       ctx.stroke();
       ctx.setLineDash([]);
@@ -368,15 +368,15 @@ export default function GlobeSection() {
       if (activeBeaconPt && activeBeaconPt.visible) {
         ctx.beginPath();
         ctx.arc(activeBeaconPt.x, activeBeaconPt.y, 4.5 * dpr, 0, Math.PI * 2);
-        ctx.fillStyle = "#FF6B4A"; // Dawn Coral pulse
-        ctx.shadowColor = "#FF6B4A";
+        ctx.fillStyle = "#A0E0EF"; // Palette 1 Tier 4 Ice Cyan pulse
+        ctx.shadowColor = "#60C1E5";
         ctx.shadowBlur = 12 * dpr;
         ctx.fill();
         ctx.shadowBlur = 0;
 
         ctx.beginPath();
         ctx.arc(activeBeaconPt.x, activeBeaconPt.y, 8 * dpr, 0, Math.PI * 2);
-        ctx.strokeStyle = "rgba(255, 107, 74, 0.5)";
+        ctx.strokeStyle = "rgba(96, 193, 229, 0.6)";
         ctx.lineWidth = 1.5 * dpr;
         ctx.stroke();
       }
@@ -386,17 +386,17 @@ export default function GlobeSection() {
       const pulseRadius = ((pulsePhase % 1) * 22 + 6) * dpr;
       const pulseAlpha = Math.max(0, 1 - (pulsePhase % 1));
 
-      // New Delhi Pin (Champagne)
+      // New Delhi Pin (Sky Blue & Ice Cyan)
       if (pDelhi.visible) {
         ctx.beginPath();
         ctx.arc(pDelhi.x, pDelhi.y, 5 * dpr, 0, Math.PI * 2);
-        ctx.fillStyle = "#E6C48A";
+        ctx.fillStyle = "#60C1E5";
         ctx.fill();
         ctx.strokeStyle = "#FFFFFF";
         ctx.lineWidth = 1.5 * dpr;
         ctx.stroke();
 
-        ctx.fillStyle = "#E6C48A";
+        ctx.fillStyle = "#A0E0EF";
         ctx.font = `bold ${10 * dpr}px monospace`;
         ctx.fillText("DELHI (ORIGIN)", pDelhi.x + 8 * dpr, pDelhi.y - 6 * dpr);
       }
@@ -406,27 +406,27 @@ export default function GlobeSection() {
         // Expanding radar rings
         ctx.beginPath();
         ctx.arc(pDest.x, pDest.y, pulseRadius, 0, Math.PI * 2);
-        ctx.strokeStyle = `rgba(255, 107, 74, ${pulseAlpha * 0.85})`;
+        ctx.strokeStyle = `rgba(96, 193, 229, ${pulseAlpha * 0.85})`;
         ctx.lineWidth = 1.5 * dpr;
         ctx.stroke();
 
         ctx.beginPath();
         ctx.arc(pDest.x, pDest.y, pulseRadius * 0.55, 0, Math.PI * 2);
-        ctx.strokeStyle = `rgba(255, 107, 74, ${pulseAlpha * 0.5})`;
+        ctx.strokeStyle = `rgba(160, 224, 239, ${pulseAlpha * 0.6})`;
         ctx.lineWidth = 1.2 * dpr;
         ctx.stroke();
 
         // Pin Solid Head
         ctx.beginPath();
         ctx.arc(pDest.x, pDest.y, 7 * dpr, 0, Math.PI * 2);
-        ctx.fillStyle = "#FF6B4A";
+        ctx.fillStyle = "#60C1E5";
         ctx.fill();
         ctx.strokeStyle = "#FFFFFF";
         ctx.lineWidth = 2 * dpr;
         ctx.stroke();
 
         // Crosshair reticle around the center target
-        ctx.strokeStyle = "rgba(230, 196, 138, 0.4)";
+        ctx.strokeStyle = "rgba(160, 224, 239, 0.55)";
         ctx.lineWidth = 1 * dpr;
         ctx.beginPath();
         ctx.moveTo(pDest.x - 14 * dpr, pDest.y);
@@ -453,8 +453,8 @@ export default function GlobeSection() {
 
       ctx.beginPath();
       ctx.arc(satX, satY, 2.5 * dpr, 0, Math.PI * 2);
-      ctx.fillStyle = "#a78bfa";
-      ctx.shadowColor = "#a78bfa";
+      ctx.fillStyle = "#60C1E5";
+      ctx.shadowColor = "#60C1E5";
       ctx.shadowBlur = 8 * dpr;
       ctx.fill();
       ctx.shadowBlur = 0;
@@ -529,7 +529,7 @@ export default function GlobeSection() {
     <section className="py-24 bg-midnight border-t border-champagne/10 relative overflow-hidden">
       {/* Background ambient lighting */}
       <div className="absolute top-1/2 left-1/3 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-horizon/20 rounded-full blur-[140px] pointer-events-none" />
-      <div className="absolute bottom-10 right-1/4 w-[350px] h-[350px] bg-[#6d28d9]/10 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-10 right-1/4 w-[350px] h-[350px] bg-sky/15 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="max-w-[1280px] mx-auto px-6 relative z-10">
         <div className="text-center max-w-2xl mx-auto mb-16">
@@ -553,8 +553,8 @@ export default function GlobeSection() {
               onClick={() => setActiveStopIndex(idx)}
               className={`px-4 py-2 rounded-full text-xs font-semibold tracking-wide transition-all cursor-pointer ${
                 activeStopIndex === idx
-                  ? "bg-champagne text-midnight shadow-lg scale-105"
-                  : "bg-horizon/30 text-mist hover:text-cloud hover:bg-horizon/50 border border-champagne/10"
+                  ? "bg-sky text-midnight shadow-lg scale-105"
+                  : "bg-horizon/30 text-mist hover:text-cloud hover:bg-horizon/50 border border-sky/20"
               }`}
             >
               {stop.city} {stop.id === "delhi" ? "(Origin)" : ""}
@@ -570,7 +570,7 @@ export default function GlobeSection() {
               {/* Telemetry HUD Badge Top */}
               <div className="absolute top-4 left-4 right-4 flex items-center justify-between text-[11px] font-mono text-champagne/90 pointer-events-none z-10 bg-midnight/70 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-champagne/20 shadow-lg">
                 <div className="flex items-center gap-1.5">
-                  <Radio className="w-3 h-3 text-coral animate-pulse" />
+                  <Radio className="w-3 h-3 text-sky animate-pulse" />
                   <span>TARGET: {activeStop.city.toUpperCase()} ({activeStop.code})</span>
                 </div>
                 <span>{activeStop.lat.toFixed(2)}°N, {activeStop.lon.toFixed(2)}°E</span>
